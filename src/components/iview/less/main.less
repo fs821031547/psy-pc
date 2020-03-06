@@ -1,0 +1,42 @@
+.iv-ivu-form-item{
+    .required{
+        position: relative;
+        color: #ec7070;
+    }
+    &.error{
+        position: relative;
+        .ivu-select-selection{
+        border: 1px solid #ec7070 !important;
+        }
+        .ivu-checkbox-group{
+            border: 1px solid #ec7070 !important;
+        }
+        .ivu-input{
+            border-color:#ec7070 !important;
+        }
+    }
+    .tooltip{
+        position: relative;
+        position: absolute;
+        z-index: 9;
+        right: 0px;
+        top: -25px;
+        background: #ffe0e8;
+        padding: 3px 15px;
+        color: #f55174;
+        border-radius: 4px;
+        box-shadow: 0 0 5px #af818d;
+        height: 25px;
+        margin: auto;
+        -webkit-transition: .5s;
+        transition: .5s;
+        &:before{
+            content: '';
+            border: 8px solid transparent;
+            border-top-color: #ffe0e8;
+            position: absolute;
+            left: 5px;
+            bottom: -15px;
+        }
+    }
+}

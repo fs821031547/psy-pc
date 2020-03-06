@@ -1,0 +1,93 @@
+.iv-border{
+  border: 1px solid #dcdee2 !important;
+}
+.iv-border-left{
+  border-left: 1px solid #dcdee2 !important;
+}
+.iv-border-top{
+  border-top: 1px solid #dcdee2 !important;
+}
+.iv-border-right{
+  border-right: 1px solid #dcdee2 !important;
+}
+.iv-border-bottom{
+  border-bottom: 1px solid #dcdee2 !important;
+}
+.iv-form{
+  border-left: 1px solid #dcdee2;
+  border-top: 1px solid #dcdee2;
+  .ivu-col{
+    border-bottom: 1px solid #dcdee2;
+    border-right: 1px solid #dcdee2;
+  }
+  .iv-ivu-form-item .ivu-form-item-label{
+    border-right: 1px solid #dcdee2;
+  }
+}
+.iv-ivu-table .ivu-table-cell {
+  overflow: unset !important;
+}
+.iv-ivu-form-item{
+  display: flex;
+  min-height: 33px;
+  height: 100%;
+  .iv-required::before{
+    content: '*';
+    color: #ec7070;
+  }
+  .iv-ivu-form-space{
+    flex: 1;
+    width: 100%;
+    min-height: 36px;
+    background: #fff;
+  }
+  .ivu-input{
+    min-height: 33px;
+    height: 100%;
+    border-radius: 0;
+    border-color: rgba(0, 0, 0, 0);
+  }
+  .ivu-form-item-label{
+    width: 80px;
+  }
+  .ivu-select{
+    flex: 1;
+  }
+  .ivu-select-selection{
+    height: 100%;
+    border-radius: 0;
+    border-color: rgba(0, 0, 0, 0)
+  }
+  .ivu-select-single .ivu-select-selection{
+    height: 33px;
+  }
+  .ivu-input-wrapper{
+    flex: 1;
+  }
+  .ivu-cascader{
+    flex: 1;
+  }
+  .ivu-checkbox-group{
+    flex: 1;
+    padding-left: 10px;
+    background: #fff;
+    // border-top: 1px solid #dcdee2;
+    // border-left: 1px solid #dcdee2;
+  }
+  .ivu-form-item-content{
+    // border: 1px solid #dcdee2;
+    border-bottom: none;
+  }
+  .ivu-form-item-content{
+    &:hover, &:active{
+      border: 1px solid #2d8cf0;
+    }
+  }
+}
+
+.ivu-input:hover, .ivu-input:focus{
+  border-color: #57a3f3 !important;
+}
+.ivu-select-visible:hover .ivu-select-selection:focus{
+  border-color: #57a3f3 !important;
+}
