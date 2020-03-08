@@ -18,30 +18,17 @@
       <Form :model="formItem" :label-width="80">
         <FormItem label="专长领域：">
               <CheckboxGroup v-model="formItem.checkbox">
-                  <Checkbox :label="item" v-for="item,$index in fieldArr1" @click.native="showField($index)"></Checkbox>
+                  <Checkbox :label="item" v-for="item in fieldArr1"></Checkbox>
               </CheckboxGroup>
-            <div class="formItem-memo">选1-3项最擅长的领域</div>
-        </FormItem>
-        <FormItem label="个人成长" class="form-item-child">
-          <div class="formItem-memo">每个专长最多选5个类型</div>
-          <CheckboxGroup v-if="currentField==$index" v-model="formItem.checkbox" v-for="items,$index in fieldArrVals">
-              <Checkbox :label="item" v-for="item in items"></Checkbox>
-          </CheckboxGroup>
-        </FormItem>
-        <FormItem label="擅长疗法：">
-              <!-- <CheckboxGroup v-model="formItem.checkbox">
-                  <Checkbox :label="item" v-for="item,$index in fieldArr1" @click.native="showField($index)"></Checkbox>
-              </CheckboxGroup> -->
-            <!-- <div class="formItem-memo">选1-3项最擅长的领域</div> -->
-        </FormItem>
-      </Form>
+          </FormItem>
+        </Form>
+        <div class="formItem-memo"></div>
     </Card>
   </div>
 </template>
 
 <script>
 import step from '_vc/step'
-let fieldArrValStr0 = '心理韧性、自我修复、童年创伤、时间管理、女性成长、跨文化适应、跨地区适应、压力管理、人生规划、自我管理、自我成长、社会适应、应对方式、理想主义、胆小、独处、安全感、爱无能、依恋问题、完美主义、注意力、拖延、身份认同、性格完善'
 let fieldArrValStr1 = '绝望、寂寞、羞涩、痛苦、敌意、怨恨、后悔、嫉妒、淡漠、厌恶、心理疲劳、情绪调节、情绪失控、情绪疏导、情绪低落、情绪管理、空虚感、无助感、羞耻感、内疚、压抑、暴躁、紧张、怯场、孤独、恐惧、自信心、自卑、悲观、脆弱、敏感、愤怒、焦虑、抑郁'
 let fieldArrValStr2 = '梦、神经质、多重人格、精神分裂、病态人格、控制狂、幻觉、慢性压力、痉挛、疲劳、死忙、丧失与哀伤辅导、成瘾、神经功能失调、自杀倾向、适应障碍、心理创伤、突发危机干预、意外事件创伤、分离创伤、情感创伤修复、成长创伤、癔症、创伤后应急障碍、神经衰弱、躁狂症、疑病症、焦虑症、抑郁症、强迫症、恐惧症、心境障碍、精神障碍、人格障碍、长期障碍、抽动、进食障碍、失眠'
 let fieldArrValStr3 = '亲密关系、安全感、父母养老、父母同住、家庭暴力、家庭创伤、家庭冲突、单亲家庭、原生家庭、组合家庭、家庭矛盾、产前心理、产后抑郁、大龄未婚困扰、复婚、挽回、丧偶、夫妻相处技巧、第三者、婚姻质量、婚姻破裂、婚姻危机、婚姻挽救、相处模式、夫妻沟通、信任问题、平淡期、吵架、出轨、再婚、逼婚、婚外情、离婚、新婚、恐婚、不婚、婚姻冷战、婚前恐惧、婚前焦虑'
@@ -61,21 +48,14 @@ export default {
       formItem: {},
       fieldArr1: ['个人成长', '情绪管理', '心理健康', '婚姻家庭', '恋爱心理', '人际关系', '职场心理', '亲子教育', '性心理'],
       fieldArr2: [],
-      fieldArrVal: [fieldArrValStr0, fieldArrValStr1, fieldArrValStr2, fieldArrValStr3, fieldArrValStr4, fieldArrValStr5, fieldArrValStr6, fieldArrValStr7, fieldArrValStr8],
-      currentField: 0
+      fieldArrVal: [fieldArrValStr1, fieldArrValStr2, fieldArrValStr3, fieldArrValStr4, fieldArrValStr5, fieldArrValStr6, fieldArrValStr7, fieldArrValStr8]
     }
   },
   computed: {
     fieldArrVals () {
       let filedArr = this.fieldArrVal
-      let fieldArrVal = filedArr.map(x => { return x.split('、') })
+      let fieldArrVal = filedArr.map(x => { return x.spilt('、') })
       return fieldArrVal
-    }
-  },
-  methods: {
-    showField (index) {
-      console.log(index)
-      this.currentField = index
     }
   }
 }
@@ -101,10 +81,6 @@ export default {
       font-size: 18px;
     }
     .formItem-memo{
-      color:#999;
-    }
-    .form-item-child{
-      background: #f2f2f2;
-      margin-left:80px;
+      color:#666;
     }
 </style>

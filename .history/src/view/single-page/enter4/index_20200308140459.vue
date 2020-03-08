@@ -2,11 +2,11 @@
   <div>
     <Card class="agree-box">
     <Steps :current="3">
-
+        
     </Steps>
     </Card>
     <div class="blank"></div>
-
+    
   </div>
 </template>
 
@@ -16,12 +16,12 @@ let agreementVal = ''
 export default {
   name: 'enter',
   components: {
-    Steps: step
+    Steps:step,
   },
-  data () {
-    return {
-    }
-  }
+  data() {
+      return {
+      }
+  },
 }
 </script>
 

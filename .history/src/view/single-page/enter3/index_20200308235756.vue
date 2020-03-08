@@ -28,12 +28,6 @@
               <Checkbox :label="item" v-for="item in items"></Checkbox>
           </CheckboxGroup>
         </FormItem>
-        <FormItem label="擅长疗法：">
-              <!-- <CheckboxGroup v-model="formItem.checkbox">
-                  <Checkbox :label="item" v-for="item,$index in fieldArr1" @click.native="showField($index)"></Checkbox>
-              </CheckboxGroup> -->
-            <!-- <div class="formItem-memo">选1-3项最擅长的领域</div> -->
-        </FormItem>
       </Form>
     </Card>
   </div>

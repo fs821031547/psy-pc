@@ -18,7 +18,7 @@
       <Form :model="formItem" :label-width="80">
         <FormItem label="专长领域：">
               <CheckboxGroup v-model="formItem.checkbox">
-                  <Checkbox :label="item" v-for="item,$index in fieldArr1" @click.native="showField($index)"></Checkbox>
+                  <Checkbox :label="item" v-for="item,$index in fieldArr1" @click="showField($index)"></Checkbox>
               </CheckboxGroup>
             <div class="formItem-memo">选1-3项最擅长的领域</div>
         </FormItem>
@@ -27,12 +27,6 @@
           <CheckboxGroup v-if="currentField==$index" v-model="formItem.checkbox" v-for="items,$index in fieldArrVals">
               <Checkbox :label="item" v-for="item in items"></Checkbox>
           </CheckboxGroup>
-        </FormItem>
-        <FormItem label="擅长疗法：">
-              <!-- <CheckboxGroup v-model="formItem.checkbox">
-                  <Checkbox :label="item" v-for="item,$index in fieldArr1" @click.native="showField($index)"></Checkbox>
-              </CheckboxGroup> -->
-            <!-- <div class="formItem-memo">选1-3项最擅长的领域</div> -->
         </FormItem>
       </Form>
     </Card>
@@ -74,7 +68,6 @@ export default {
   },
   methods: {
     showField (index) {
-      console.log(index)
       this.currentField = index
     }
   }

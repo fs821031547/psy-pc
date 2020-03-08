@@ -18,21 +18,15 @@
       <Form :model="formItem" :label-width="80">
         <FormItem label="专长领域：">
               <CheckboxGroup v-model="formItem.checkbox">
-                  <Checkbox :label="item" v-for="item,$index in fieldArr1" @click.native="showField($index)"></Checkbox>
+                  <Checkbox :label="item" v-for="item in fieldArr1"></Checkbox>
               </CheckboxGroup>
             <div class="formItem-memo">选1-3项最擅长的领域</div>
         </FormItem>
         <FormItem label="个人成长" class="form-item-child">
           <div class="formItem-memo">每个专长最多选5个类型</div>
-          <CheckboxGroup v-if="currentField==$index" v-model="formItem.checkbox" v-for="items,$index in fieldArrVals">
+          <CheckboxGroup v-model="formItem.checkbox" v-for="items in fieldArrVals">
               <Checkbox :label="item" v-for="item in items"></Checkbox>
           </CheckboxGroup>
-        </FormItem>
-        <FormItem label="擅长疗法：">
-              <!-- <CheckboxGroup v-model="formItem.checkbox">
-                  <Checkbox :label="item" v-for="item,$index in fieldArr1" @click.native="showField($index)"></Checkbox>
-              </CheckboxGroup> -->
-            <!-- <div class="formItem-memo">选1-3项最擅长的领域</div> -->
         </FormItem>
       </Form>
     </Card>
@@ -61,21 +55,14 @@ export default {
       formItem: {},
       fieldArr1: ['个人成长', '情绪管理', '心理健康', '婚姻家庭', '恋爱心理', '人际关系', '职场心理', '亲子教育', '性心理'],
       fieldArr2: [],
-      fieldArrVal: [fieldArrValStr0, fieldArrValStr1, fieldArrValStr2, fieldArrValStr3, fieldArrValStr4, fieldArrValStr5, fieldArrValStr6, fieldArrValStr7, fieldArrValStr8],
-      currentField: 0
+      fieldArrVal: [fieldArrValStr0, fieldArrValStr1, fieldArrValStr2, fieldArrValStr3, fieldArrValStr4, fieldArrValStr5, fieldArrValStr6, fieldArrValStr7, fieldArrValStr8]
     }
   },
   computed: {
     fieldArrVals () {
       let filedArr = this.fieldArrVal
-      let fieldArrVal = filedArr.map(x => { return x.split('、') })
+      let fieldArrVal = filedArr.map(x => { return x.spilt('、') })
       return fieldArrVal
-    }
-  },
-  methods: {
-    showField (index) {
-      console.log(index)
-      this.currentField = index
     }
   }
 }

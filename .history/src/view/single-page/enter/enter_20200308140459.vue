@@ -2,18 +2,18 @@
   <div>
     <Card class="agree-box">
     <Steps :current="0">
-
+        
     </Steps>
     </Card>
     <div class="blank"></div>
-    <Card class="agree-box">
+    <Card class="agree-box"> 
         <div class="enter-title">
             咨询师入驻协议
         </div>
         <p>壹点心理对入驻的咨询师有着严格的职业要求及审核标准，请在开始申请入驻之前，仔细阅读下方的协议说明</p>
         <div class="blank"></div>
         <div class="ivu-input-wrapper ivu-input-wrapper-default ivu-input-type-textarea">
-
+        
         <textarea class="ivu-input define-textarea">一、提示条款
 
 在接受本协议之前，应当认真阅读本协议。请咨询师务必审慎阅读、充分理解各条款内容，特别是免除或限制责任的条款、法律适用、和争议解决条款。免除或限制责任的条款将以粗体下划线标识，应重点阅读。如咨询师对协议有任何疑问，请不要进行后续操作，及时可联系壹心理。
@@ -286,12 +286,12 @@ let agreementVal = ''
 export default {
   name: 'enter',
   components: {
-    Steps: step
+    Steps:step,
   },
-  data () {
-    return {
-    }
-  }
+  data() {
+      return {
+      }
+  },
 }
 </script>
 

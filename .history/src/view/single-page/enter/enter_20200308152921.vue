@@ -282,7 +282,7 @@
 
 <script>
 import step from '_vc/step'
-let agreementVal = ''
+
 export default {
   name: 'enter',
   components: {
