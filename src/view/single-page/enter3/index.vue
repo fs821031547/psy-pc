@@ -29,12 +29,161 @@
           </CheckboxGroup>
         </FormItem>
         <FormItem label="擅长疗法：">
-              <!-- <CheckboxGroup v-model="formItem.checkbox">
-                  <Checkbox :label="item" v-for="item,$index in fieldArr1" @click.native="showField($index)"></Checkbox>
-              </CheckboxGroup> -->
+              <CheckboxGroup v-model="formItem.checkbox">
+                  <Checkbox :label="item" v-for="item,$index in goodSkill"></Checkbox>
+              </CheckboxGroup>
             <!-- <div class="formItem-memo">选1-3项最擅长的领域</div> -->
         </FormItem>
+        <div class="define-handle-box">
+          <Button size="large" type="primary">保存</Button>
+        </div>
       </Form>
+      <Divider class="define-divider" orientation="left">教育背景<span class="formItem-memo">&nbsp;&nbsp;(本科及以上)</span></Divider>
+      <Form :model="formItem" :label-width="80">
+        <FormItem label="学校">
+          <Input v-model="formItem.school" placeholder="学校"></Input>
+        </FormItem>
+        <FormItem label="起止时间">
+          <DatePicker type="daterange" placeholder="Select date" style="width: 200px"></DatePicker>
+        </FormItem>
+        <FormItem label="专业">
+          <Input v-model="formItem.school" placeholder="专业"></Input>
+        </FormItem>
+        <FormItem label="学位">
+          <Input v-model="formItem.school" placeholder="学位"></Input>
+        </FormItem>
+        <FormItem label="学历证书">
+          <Upload :before-upload="handleUpload" action="//jsonplaceholder.typicode.com/posts/">
+            <Button icon="ios-cloud-upload-outline">选择图片</Button>
+            <span class="formItem-memo">&nbsp;&nbsp;毕业证书或学生证(图片格式 jpg/png)</span>
+          </Upload>
+        </FormItem>
+        <div class="define-handle-box">
+          <Button size="large" type="default">╋ 添加一项</Button>
+          <Button size="large" type="primary">保存</Button>
+        </div>
+      </Form>
+      <Divider class="define-divider" orientation="left">从业资质</Divider>
+      <Form :model="formItem" :label-width="80">
+        <FormItem label="">
+          <RadioGroup v-model="formItem.congyezizi">
+            <Radio label="国家二级咨询师"></Radio>
+            <Radio label="国家三级咨询师"></Radio>
+            <Radio label="注册系统咨询师"></Radio>
+            <Radio label="注册系统督导师"></Radio>
+            <Radio label="其他"><Input v-model="formItem.school" placeholder="其他"></Input></Radio>
+          </RadioGroup>
+        </FormItem>
+        <FormItem label="证书编号">
+          <Input v-model="formItem.school" placeholder="证书编号"></Input>
+        </FormItem>
+        <FormItem label="资质证书">
+          <Upload :before-upload="handleUpload" action="//jsonplaceholder.typicode.com/posts/">
+            <Button icon="ios-cloud-upload-outline">选择图片</Button>
+            <span class="formItem-memo">&nbsp;&nbsp;毕业证书或学生证(图片格式 jpg/png)</span>
+          </Upload>
+        </FormItem>
+        <div class="define-handle-box">
+          <Button size="large" type="default">╋ 添加一项</Button>
+          <Button size="large" type="primary">保存</Button>
+        </div>
+      </Form>
+      <Divider class="define-divider" orientation="left">个人累计时长<a class="download-item">下载证明样例</a></Divider>
+      <Form :model="formItem" :label-width="80">
+        <FormItem label="所在机构">
+          <Input v-model="formItem.school" placeholder="所在机构"></Input>
+        </FormItem>
+        <FormItem label="起止时间">
+          <DatePicker type="daterange" placeholder="Select date" style="width: 200px"></DatePicker>
+        </FormItem>
+        <FormItem label="累计时长">
+          <Input v-model="formItem.school" placeholder="累计时长"></Input>小时
+        </FormItem>
+        
+        <FormItem label="证明信件">
+          <Upload :before-upload="handleUpload" action="//jsonplaceholder.typicode.com/posts/">
+            <Button icon="ios-cloud-upload-outline">选择图片</Button>
+            <span class="formItem-memo">&nbsp;&nbsp;由实习/从业机构或督导/权威老师开具的任何证明书信(图片格式 jpg/png)</span>
+          </Upload>
+        </FormItem>
+        <FormItem label="证明人联系">
+          <Input v-model="formItem.school" placeholder="若无证书，请填写证明人姓名和电话。如：徐生，督导师，13900139000"></Input>
+        </FormItem>
+        <div class="define-handle-box">
+          <Button size="large" type="default">╋ 添加一项</Button>
+          <Button size="large" type="primary">保存</Button>
+        </div>
+      </Form>
+      <Divider class="define-divider" orientation="left">培训经历</Divider>
+      <Form :model="formItem" :label-width="80">
+        <FormItem label="主办机构">
+          <Input v-model="formItem.school" placeholder="主办机构"></Input>
+        </FormItem>
+        <FormItem label="起止时间">
+          <DatePicker type="daterange" placeholder="Select date" style="width: 200px"></DatePicker>
+        </FormItem>
+        <FormItem label="课程名称">
+          <Input v-model="formItem.school" placeholder="课程名称"></Input>
+        </FormItem>
+        
+        <FormItem label="培训证书">
+          <Upload :before-upload="handleUpload" action="//jsonplaceholder.typicode.com/posts/">
+            <Button icon="ios-cloud-upload-outline">选择图片</Button>
+            <span class="formItem-memo">&nbsp;&nbsp;由实习/从业机构或督导/权威老师开具的任何证明书信(图片格式 jpg/png)</span>
+          </Upload>
+        </FormItem>
+        <FormItem label="证明人">
+          <Input v-model="formItem.school" placeholder="若无证明信件，请填写证明人姓名和电话。如：徐生，督导师，13900139000"></Input>
+        </FormItem>
+        <div class="define-handle-box">
+          <Button size="large" type="default">╋ 添加一项</Button>
+          <Button size="large" type="primary">保存</Button>
+        </div>
+      </Form>
+      <Divider class="define-divider" orientation="left">接受督导经历</Divider>
+      <Form :model="formItem" :label-width="80">
+        <FormItem label="督导师/机构">
+          <Input v-model="formItem.school" placeholder="督导师/机构"></Input>
+        </FormItem>
+        <FormItem label="起止时间">
+          <DatePicker type="daterange" placeholder="Select date" style="width: 200px"></DatePicker>
+        </FormItem>
+        <FormItem label="督导取向">
+          <Input v-model="formItem.school" placeholder="督导取向"></Input>
+        </FormItem>
+        <FormItem label="督导形式">
+          <RadioGroup v-model="formItem.congyezizi">
+            <Radio label="个人"></Radio>
+            <Radio label="团体"></Radio>
+          </RadioGroup>
+        </FormItem>
+        <FormItem label="累计时长">
+          <Input v-model="formItem.school" placeholder="累计时长"></Input>小时
+        </FormItem>
+        <FormItem label="证明信件">
+          <Upload :before-upload="handleUpload" action="//jsonplaceholder.typicode.com/posts/">
+            <Button icon="ios-cloud-upload-outline">选择图片</Button>
+            <span class="formItem-memo">&nbsp;&nbsp;由实习/从业机构或督导/权威老师开具的任何证明书信(图片格式 jpg/png)</span>
+          </Upload>
+        </FormItem>
+        <FormItem label="证明人联系">
+          <Input v-model="formItem.school" placeholder="若无证明信件，请填写督导老师/机构的联系电话"></Input>
+        </FormItem>
+        <div class="define-handle-box">
+          <Button size="large" type="default">╋ 添加一项</Button>
+          <Button size="large" type="primary">保存</Button>
+        </div>
+      </Form>
+      <div class="blank-3"></div>
+      <div class="t1-desc">
+        在点击「下一步」前，请您留意：
+        <br>
+        <br>
+        对于必填内容（擅长领域和疗法、教育背景、从业资质、个案累计时长、培训经历、接受督导经历），必须在每一项点击「保存」，否则，您在点击「下一步」时，页面会无反应；
+      </div>
+      <div class="define-handle-box">
+          <Button size="large" type="primary">下一步</Button>
+        </div>
     </Card>
   </div>
 </template>
@@ -50,7 +199,7 @@ let fieldArrValStr5 = '舍友关系、陌生人、朋友沟通、同学交往、
 let fieldArrValStr6 = '职场压力、跳槽、同级关系、工作迷茫、职场焦虑、职业倦怠、职场性骚扰、办公室恋情、潜规则、职场沟通、上下级关系、职场人际关系、工作与家庭生活平衡、新人适应、辞职、职业转型、职业规划、职业发展'
 let fieldArrValStr7 = '二孩、儿童发展、父母成长、行为纠正、习惯培养、育儿困惑、代际沟通、亲子冲突、青春期困惑、青春期独立、选择专业、考前焦虑、中考高考压力释放、休学退学、逃学、辍学、注意力不集中、厌学、学习压力大、学习困难、攻击性行为干预、青少年抑郁、离家出走、睡眠习惯差、适应新环境、分离焦虑、自理能力差、打架斗殴、孤僻、自闭、懒惰、网瘾、贪玩、多动、撒谎、叛逆'
 let fieldArrValStr8 = '暴露狂、露阴癖、性暴力、心理性别、性侵害、性骚扰、性压抑、性幻想、处女情结、性冷淡、性恐惧、性成瘾、性障碍、易性癖、双性恋、同性恋、性偏好、性取向、性身份、SM'
-
+let goodSkill = '心理动力学/精神分析，自体心理学，个体心理学(阿德勒疗法)，沙盘/箱庭疗法，催眠治疗，意向对话，辩证行为疗法，正念减压治疗(MBSR)，接纳与承若治疗(ACT)，认知行为疗法，离职情绪行为疗法(REBT)，森田疗法，人本主义，表达性艺术治疗，超个人心理，游戏治疗，艺术治疗(舞动治疗/绘画治疗/心理剧)，现实主义疗法(RT)，存在主义疗法，完形治疗(格式塔疗法)，女权主义疗法，家庭系统治疗，萨提亚家庭治疗，团体治疗，焦点解决短期治疗(SFBT)，叙事治疗，整合取向，EFT'
 export default {
   name: 'enter',
   components: {
@@ -70,6 +219,10 @@ export default {
       let filedArr = this.fieldArrVal
       let fieldArrVal = filedArr.map(x => { return x.split('、') })
       return fieldArrVal
+    },
+    goodSkill(){
+      
+      return goodSkill.split('，')
     }
   },
   methods: {
@@ -102,9 +255,14 @@ export default {
     }
     .formItem-memo{
       color:#999;
+      font-size: 12px;
     }
     .form-item-child{
       background: #f2f2f2;
       margin-left:80px;
+    }
+    .download-item{
+      color:#2d8cf0;
+      font-size: 12px;
     }
 </style>
