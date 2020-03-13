@@ -6,7 +6,7 @@
     </Steps>
     </Card>
     <div class="blank"></div>
-    <Card>
+    <Card class="agree-box">
       <Form :model="formItem" :label-width="120">
         <FormItem label="专业形象照">
           <Upload :before-upload="handleUpload" action="//jsonplaceholder.typicode.com/posts/">
@@ -18,10 +18,10 @@
         </FormItem>
         <FormItem label="咨询方式价格">
           <div class="formItem-memo">价格需为50的倍数；不填写某个价格，即表示不提供该咨询方式服务</div>
-          <FormItem label="文字咨询">
+          <FormItem label="文字咨询" :label-width="80">
             <Input class="define-input" v-model="formItem.school" placeholder="文字咨询"></Input> 元 / 50分钟
           </FormItem>
-          <FormItem label="电话咨询">
+          <FormItem label="电话咨询" :label-width="80">
             <Input class="define-input" v-model="formItem.school" placeholder="电话咨询">
             
             </Input>
@@ -29,7 +29,7 @@
           </FormItem>
         </FormItem>
         <div class="define-handle-box">
-          <Button size="large" type="default">上一步</Button>
+          <Button style="margin-right:20px;" size="large" type="default">上一步</Button>
           <Button size="large" type="primary">完美提交</Button>
         </div>
       </Form>
