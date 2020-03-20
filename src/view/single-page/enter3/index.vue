@@ -18,19 +18,19 @@
       <Form :model="formItem" :label-width="80">
         <FormItem label="专长领域：">
               <CheckboxGroup v-model="formItem.checkbox">
-                  <Checkbox :label="item" v-for="item,$index in fieldArr1" @click.native="showField($index)"></Checkbox>
+                  <Checkbox :label="item" :key="$index" v-for="(item,$index) in fieldArr1" @click.native="showField($index)"></Checkbox>
               </CheckboxGroup>
             <div class="formItem-memo">选1-3项最擅长的领域</div>
         </FormItem>
         <FormItem label="个人成长" class="form-item-child">
           <div class="formItem-memo">每个专长最多选5个类型</div>
-          <CheckboxGroup v-if="currentField==$index" v-model="formItem.checkbox" v-for="items,$index in fieldArrVals">
+          <CheckboxGroup v-if="currentField==$index" v-model="formItem.checkbox" :key="$index" v-for="(items,$index) in fieldArrVals">
               <Checkbox :label="item" v-for="item in items"></Checkbox>
           </CheckboxGroup>
         </FormItem>
         <FormItem label="擅长疗法：">
               <CheckboxGroup v-model="formItem.checkbox">
-                  <Checkbox :label="item" v-for="item,$index in goodSkill"></Checkbox>
+                  <Checkbox :label="item" :key="$index" v-for="(item,$index) in goodSkill"></Checkbox>
               </CheckboxGroup>
             <!-- <div class="formItem-memo">选1-3项最擅长的领域</div> -->
         </FormItem>
@@ -39,28 +39,40 @@
         </div>
       </Form>
       <Divider class="define-divider" orientation="left">教育背景<span class="formItem-memo">&nbsp;&nbsp;(本科及以上)</span></Divider>
-      <Form :model="formItem" :label-width="80">
+      <Form :model="item" :key="index" v-for="(item, index) in jiaoyuArr" :label-width="80">
         <FormItem label="学校">
-          <Input v-model="formItem.school" placeholder="学校"></Input>
+          <Input v-model="item.school" placeholder="学校"></Input>
         </FormItem>
         <FormItem label="起止时间">
-          <DatePicker type="daterange" placeholder="Select date" style="width: 200px"></DatePicker>
+          <DatePicker type="daterange" v-model="item.time" placeholder="Select date" style="width: 200px"></DatePicker>
         </FormItem>
         <FormItem label="专业">
-          <Input v-model="formItem.school" placeholder="专业"></Input>
+          <Input v-model="item.school" placeholder="专业"></Input>
         </FormItem>
         <FormItem label="学位">
-          <Input v-model="formItem.school" placeholder="学位"></Input>
+          <Input v-model="item.degree" placeholder="学位"></Input>
         </FormItem>
         <FormItem label="学历证书">
-          <Upload :before-upload="handleUpload" action="//jsonplaceholder.typicode.com/posts/">
+          <Upload ref="upload"
+                class="upload-item"
+                :show-upload-list="false"
+                :on-success="handleOneSuccess"
+                :data="uploadData.mount"
+                :format="uploadData.format"
+                :accept="uploadData.accept"
+                :max-size="uploadData.maxSize"
+                :on-format-error="handleFormatError"
+                :on-exceeded-size="handleMaxSize"
+                :before-upload="handleBeforeUpload"
+                :action="uploadData.action"
+                style="width:500px;">
             <Button icon="ios-cloud-upload-outline">选择图片</Button>
             <span class="formItem-memo">&nbsp;&nbsp;毕业证书或学生证(图片格式 jpg/png)</span>
           </Upload>
         </FormItem>
         <div class="define-handle-box">
           <Button size="large" type="default">╋ 添加一项</Button>
-          <Button size="large" type="primary">保存</Button>
+          <Button size="large" type="primary" @click="submit()">保存</Button>
         </div>
       </Form>
       <Divider class="define-divider" orientation="left">从业资质</Divider>
@@ -75,7 +87,7 @@
           </RadioGroup>
         </FormItem>
         <FormItem label="证书编号">
-          <Input v-model="formItem.school" placeholder="证书编号"></Input>
+          <Input v-model="formItem.certificateNumber" placeholder="证书编号"></Input>
         </FormItem>
         <FormItem label="资质证书">
           <Upload :before-upload="handleUpload" action="//jsonplaceholder.typicode.com/posts/">
@@ -85,7 +97,7 @@
         </FormItem>
         <div class="define-handle-box">
           <Button size="large" type="default">╋ 添加一项</Button>
-          <Button size="large" type="primary">保存</Button>
+          <Button size="large" @click.native="saveZizi()" type="primary">保存</Button>
         </div>
       </Form>
       <Divider class="define-divider" orientation="left">个人累计时长<a class="download-item">下载证明样例</a></Divider>
@@ -190,6 +202,7 @@
 
 <script>
 import step from '_vc/step'
+import { mapActions } from 'vuex'
 let fieldArrValStr0 = '心理韧性、自我修复、童年创伤、时间管理、女性成长、跨文化适应、跨地区适应、压力管理、人生规划、自我管理、自我成长、社会适应、应对方式、理想主义、胆小、独处、安全感、爱无能、依恋问题、完美主义、注意力、拖延、身份认同、性格完善'
 let fieldArrValStr1 = '绝望、寂寞、羞涩、痛苦、敌意、怨恨、后悔、嫉妒、淡漠、厌恶、心理疲劳、情绪调节、情绪失控、情绪疏导、情绪低落、情绪管理、空虚感、无助感、羞耻感、内疚、压抑、暴躁、紧张、怯场、孤独、恐惧、自信心、自卑、悲观、脆弱、敏感、愤怒、焦虑、抑郁'
 let fieldArrValStr2 = '梦、神经质、多重人格、精神分裂、病态人格、控制狂、幻觉、慢性压力、痉挛、疲劳、死忙、丧失与哀伤辅导、成瘾、神经功能失调、自杀倾向、适应障碍、心理创伤、突发危机干预、意外事件创伤、分离创伤、情感创伤修复、成长创伤、癔症、创伤后应急障碍、神经衰弱、躁狂症、疑病症、焦虑症、抑郁症、强迫症、恐惧症、心境障碍、精神障碍、人格障碍、长期障碍、抽动、进食障碍、失眠'
@@ -207,11 +220,60 @@ export default {
   },
   data () {
     return {
-      formItem: {},
+      jiaoyuArr: [{
+        school:'',
+        strattime:'',
+        endtime:'',
+        degree:'',
+        certificate:''
+      }],
+      zizhiArr: [{
+        certificateNumber:'',
+        certificateUrl:'',
+      }],
+      hoursArr: [{
+        organization:'',
+        strattime:'',
+        endtime:'',
+        provePhone:'',
+        proveUrl:''
+      }],
+      peixunArr: [{
+        organization:'',
+        strattime:'',
+        endtime:'',
+        provePhone:'',
+        proveUrl:'',
+        courseName:''
+      }],
+      dudaoArr:[{
+        organization:'',
+        strattime:'',
+        endtime:'',
+        provePhone:'',
+        proveUrl:'',
+        courseType:'',
+        courseWay:''
+      }],
       fieldArr1: ['个人成长', '情绪管理', '心理健康', '婚姻家庭', '恋爱心理', '人际关系', '职场心理', '亲子教育', '性心理'],
       fieldArr2: [],
       fieldArrVal: [fieldArrValStr0, fieldArrValStr1, fieldArrValStr2, fieldArrValStr3, fieldArrValStr4, fieldArrValStr5, fieldArrValStr6, fieldArrValStr7, fieldArrValStr8],
-      currentField: 0
+      currentField: 0,
+      uploadData: {
+        format: ['jpg', 'jpeg', 'png'],
+        accept: 'image/jpg, image/jpeg, image/png',
+        maxSize: 1024 * 500, // 以 byte 为单位
+        name: 'file',
+        action: 'sys/oss/upload',
+        domain: '',
+        disabled: false,
+        canUpload: false,
+        progress: 0,
+        mount: {
+          key: '',
+          token: ''
+        }
+      }
     }
   },
   computed: {
@@ -226,10 +288,56 @@ export default {
     }
   },
   methods: {
+    ...mapActions([
+      'getZizi',
+    ]),
     showField (index) {
       console.log(index)
       this.currentField = index
-    }
+    },
+    submit () {
+      console.log('time:',this.formItem.time);
+    },
+    saveZizi(){
+      let param = this.formItem;
+      this.getZizi(param).then(res => {
+        console.log('res:',res);
+      })
+    },
+    handleFormatError (file) {
+      this.$Notice.warning({
+        title: '文件格式错误',
+        desc: 'File format of ' + file.name + ' is incorrect, please select jpg or png.'
+      })
+    },
+    handleMaxSize (file) {
+      this.$Notice.warning({
+        title: '超过文件大小限制',
+        desc: '文件 ' + file.name + ' 太大, 不能超过 500M.'
+      })
+    },
+    handleBeforeUpload (file) {
+      const date = new Date()
+      // 获取文件扩展名
+      const fileType = file.name.substring(file.name.lastIndexOf('.'))
+      const uid = Math.floor(Math.random() * 10000000)
+      const key = 'official/img/' + date.getFullYear() + '/' + (date.getMonth() + 1) + '/' +
+      date.getDate() + '/' + uid + fileType
+      return this.getToken().then(res => {
+        // res.token
+        // this.uploadData.domain = res.dn
+        this.uploadData.mount.token = res.qn_upToken
+        this.uploadData.mount.key = key
+        return true
+      })
+    },
+    handleOneSuccess (res, file) {
+      if (res.key) {
+        this.formItem.imgUrl = QiniuHead + res.key
+      } else {
+        this.$Message.error('上传失败！')
+      }
+    },
   }
 }
 </script>

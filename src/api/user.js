@@ -1,12 +1,13 @@
 import axios from '@/libs/api.request'
 
-export const login = ({ userName, password }) => {
+export const login = ({ phone, password }) => {
   const data = {
-    userName,
+    phone,
     password
   }
+
   return axios.request({
-    url: 'login',
+    url: 'api/ConsultantInfo/add',
     data,
     method: 'post'
   })
@@ -25,6 +26,14 @@ export const getUserInfo = (token) => {
 export const logout = (token) => {
   return axios.request({
     url: 'logout',
+    method: 'post'
+  })
+}
+
+export const getZizi = (data) => {
+  return axios.request({
+    url: 'api/PsyConsultantZizhi/add',
+    data,
     method: 'post'
   })
 }

@@ -61,7 +61,7 @@ export default {
       this.$refs.loginForm.validate((valid) => {
         if (valid) {
           this.$emit('on-success-valid', {
-            userName: this.form.userName,
+            phone: this.form.userName,
             password: this.form.password
           })
         }

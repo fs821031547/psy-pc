@@ -8,7 +8,7 @@ export default [
     meta: {
       title: 'Login - 登录'
     },
-    component: () => import('@/view/login/login.vue')
+    component: () => import('@/view/single-page/login/login.vue')
   },
   {
     path: '/',

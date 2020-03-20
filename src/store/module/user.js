@@ -1,4 +1,4 @@
-import { login, logout, getUserInfo } from '@/api/user'
+import { login, logout, getUserInfo, getZizi } from '@/api/user'
 import { setToken, getToken } from '@/libs/util'
 
 export default {
@@ -29,15 +29,15 @@ export default {
   },
   actions: {
     // 登录
-    handleLogin ({ commit }, {userName, password}) {
-      userName = userName.trim()
+    handleLogin ({ commit }, {phone, password}) {
+      phone = phone.trim()
       return new Promise((resolve, reject) => {
         login({
-          userName,
+          phone,
           password
         }).then(res => {
-          const data = res.data
-          commit('setToken', data.token)
+          // const data = res.data
+          // commit('setToken', data.token)
           resolve()
         }).catch(err => {
           reject(err)
@@ -71,6 +71,18 @@ export default {
           commit('setUserId', data.user_id)
           commit('setAccess', data.access)
           resolve(data)
+        }).catch(err => {
+          reject(err)
+        })
+      })
+    },
+    // 添加咨询师资质
+    getZizi ({ commit }, data) {
+      return new Promise((resolve, reject) => {
+        getZizi(data).then(res => {
+          // const data = res.data
+          // commit('setToken', data.token)
+          resolve()
         }).catch(err => {
           reject(err)
         })

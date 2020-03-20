@@ -43,7 +43,7 @@ module.exports = {
         }
       },
       '/api': {
-        target: 'http://192.168.110.156:9420',
+        target: 'http://192.168.3.18',
         pathRewrite: { '/api': '' }
       }
     }

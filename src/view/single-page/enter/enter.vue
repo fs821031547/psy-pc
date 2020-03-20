@@ -274,7 +274,7 @@
 </div>
     <div class="blank-3"></div>
         <div class="define-handle-box">
-            <Button class="define-handle-button" type="primary">我知道了</Button>
+            <Button class="define-handle-button" @click.native="goNext()" type="primary">我知道了</Button>
         </div>
     </Card>
   </div>
@@ -282,7 +282,6 @@
 
 <script>
 import step from '_vc/step'
-let agreementVal = ''
 export default {
   name: 'enter',
   components: {
@@ -290,6 +289,11 @@ export default {
   },
   data () {
     return {
+    }
+  },
+  methods: {
+    goNext () {
+      this.$router.push('enter2')
     }
   }
 }
